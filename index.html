@@ -19,30 +19,38 @@
             <input type="text" class="c-panel__input" placeholder="Password">
             <a href="#" class="c-btn" onclick="login()">Log In</a>
             <script>
-    function login() {
-        // Get the values from the input fields
-        var usernameInput = document.getElementById('usernameInput');
-        var passwordInput = document.getElementById('passwordInput');
+            function login() {
+    // Get the values from the input fields
+    var usernameInput = document.getElementById('usernameInput');
+    var passwordInput = document.getElementById('passwordInput');
 
-        // Validate that both username and password are not empty
-        var username = usernameInput.value.trim();
-        var password = passwordInput.value.trim();
+    // Validate that both username and password are not empty
+    var username = usernameInput.value.trim();
+    var password = passwordInput.value.trim();
 
-        if (username === '' || password === '') {
-            // Display an error message or take appropriate action for empty values
-            alert('Username and password cannot be empty.');
-            return;
-        }
+    if (username === '' || password === '') {
+        // Display an error message or take appropriate action for empty values
+        alert('Username and password cannot be empty.');
+        return;
+    }
 
+    // Check if Android object is defined (for testing in browser)
+    if (typeof Android !== 'undefined') {
         // Construct the custom URI
         var uri = 'myapp://login?username=' + encodeURIComponent(username) + '&password=' + encodeURIComponent(password);
 
-        // Redirect to the custom URI
-        window.location.href = uri;
+        // Call the Android interface to send the login data
+        Android.onLogin(username, password);
+    } else {
+        // For testing in the browser
+        console.log('Android object not available. Testing in browser.');
     }
-</script>
 
-          
+    // Redirect to the custom URI (for testing in browser)
+    window.location.href = uri;
+}
+
+          </script>
           
             <span class="c-panel__span">OR</span>
           </div>
